@@ -1,12 +1,12 @@
-from user import User
-from post import Post
+#pip install requests
+# git lab API
+import requests
 
-app_user_one=User("nn@nn.com","Nana Janashia",'pwd1',"DevOps engineer")
-app_user_one.get_user_info()
-app_user_one.change_job_title("DevOps trainer")
-app_user_one.get_user_info()
+response=requests.get("https://gitlab.com/api/v4/users/23155619/projects")
+print(response.text)
+print(response.json())
 
-app_user_two=User("aa@aa.com","James Bond","supersecret","Agent")
-app_user_two.get_user_info()
-
-new_post=Post("on a secret mission today", app_user_two.name)
+print(type(response.text))
+my_project=response.json()
+for project in my_project:
+    print(f"Project Name: {project['name']}  Project Url{project['web_url']}")
